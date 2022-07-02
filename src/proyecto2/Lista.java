@@ -9,41 +9,41 @@ package proyecto2;
  * @author Radenixlol
  */
 public class Lista {
-    private Lista first;
-    private Lista last;
+
+    private NodoLista first, last;
     private int size;
-    
-    public void CreaLista(){
-        this.setFirst(null);
-        this.setLast(null);
-        this.setSize(0);
+
+    public Lista(NodoLista first, NodoLista last, int size) {
+        this.first = first;
+        this.last = last;
+        this.size = 0;
     }
 
     /**
      * @return the first
      */
-    public Lista getFirst() {
+    public NodoLista getFirst() {
         return first;
     }
 
     /**
      * @param first the first to set
      */
-    public void setFirst(Lista first) {
+    public void setFirst(NodoLista first) {
         this.first = first;
     }
 
     /**
      * @return the last
      */
-    public Lista getLast() {
+    public NodoLista getLast() {
         return last;
     }
 
     /**
      * @param last the last to set
      */
-    public void setLast(Lista last) {
+    public void setLast(NodoLista last) {
         this.last = last;
     }
 
@@ -53,12 +53,4 @@ public class Lista {
     public int getSize() {
         return size;
     }
-
-    /**
-     * @param size the size to set
-     */
-    public void setSize(int size) {
-        this.size = size;
-    }
-    
 }
