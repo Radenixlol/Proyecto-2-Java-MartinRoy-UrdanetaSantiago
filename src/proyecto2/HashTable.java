@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 public class HashTable {
 
+    
     private HashNode[] arreglo;
     private int capacidad;
     private int tamaño;
