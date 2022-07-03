@@ -109,6 +109,37 @@ public class Backup {
         } 
     }
     
+    /**
+ * @author Roy Martin
+ * @deprecated: Hace una clasificación de los datos obtenidos en la lectura y los asigna a los lugares respectivos del grafo
+ */
+    public void lectura_data() {
+        String data = this.Seleccionador_lectura();
+        if (!"".equals(data)) {
+            String pt = "%°%";
+            String[] datos = data.split(pt);
+            for (int i = 0; i < datos.length-1; i++) {
+                String[] nodito;
+                nodito = datos[i].split("\n\n");
+                System.out.println(nodito.length);
+                String title = nodito[0];
+                String[] authors = nodito[1].split(";");
+                String text = nodito[2];
+                String[] keys = nodito[3].split(";");
+                //escribir método de asignación al hash table
+                System.out.println(title);
+                for(int j = 0; j < authors.length; j++){
+                    System.out.println(authors[j]);
+                }
+                System.out.println(text);
+                for(int j = 0; j < keys.length; j++){
+                    System.out.println(keys[j]);
+                }
+            }
+            System.out.println("carga lista");
+        }
+    }
+    
 ///**
 // * @author Roy Martin
 // * @deprecated: Se encarga de procesar la lista de productos de cada almacen y retornarlo
