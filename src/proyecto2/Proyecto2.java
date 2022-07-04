@@ -15,8 +15,10 @@ public class Proyecto2 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Ventana1 v = new Ventana1();
+        v.setVisible(true);
         Backup archivo = new Backup();
         archivo.lectura_nueva();
     }
-    
+
 }
