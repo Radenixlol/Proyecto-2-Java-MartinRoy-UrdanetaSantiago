@@ -17,6 +17,7 @@ public class Proyecto2 {
         // TODO code application logic here
 
         HashTablePrinc table = new HashTablePrinc();
+        table.Inicio();
         
         String[] keywords1 = {"rapido", "eficiente"};
         String[] autores1 = {"luis", "juan"};

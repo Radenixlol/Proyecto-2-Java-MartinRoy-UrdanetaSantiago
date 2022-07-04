@@ -15,7 +15,7 @@ public class NodoListaSecun {
     private String[] elementos;
     private String title;
 
-    public NodoListaSecun(String[] elementos) {
+    public NodoListaSecun(String[] elementos, String title) {
         this.next = null;
         this.elementos = elementos;
         this.title = title;

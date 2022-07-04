@@ -8,13 +8,13 @@ import javax.swing.JOptionPane;
  */
 public class HashTableSecun {
 
-    private HashNodeSecun[] arreglo;
+    private ListaSecun[] arreglo;
     private int capacidad;
     private int tamaño;
 
     public HashTableSecun() {
         this.capacidad = 401;
-        arreglo = new HashNodeSecun[capacidad];
+        arreglo = new ListaSecun[capacidad];
         this.tamaño = 0;
     }
 
@@ -26,31 +26,33 @@ public class HashTableSecun {
         return tamaño == 0;
     }
 
+    public void Inicio() {
+        for (int i = 0; i < this.capacidad; i++) {
+            arreglo[i] = new ListaSecun();
+        }
+    }
+
     public void Agregar(NodoListaSecun Nodo) {
         int arregloIndice = getArregloIndice(Nodo);
-        HashNodeSecun cabeza = arreglo[arregloIndice];
-        if (cabeza == null) {
+        ListaSecun cabeza = arreglo[arregloIndice];
+        if (cabeza.esVacio()) {
+            cabeza.insertarFinal(Nodo);
             tamaño++;
-            ListaSecun Lista = new ListaSecun();
-            Lista.insertarFinal(Nodo);
-            cabeza = arreglo[arregloIndice];
-            HashNodeSecun NodoHash = new HashNodeSecun(Nodo);
-            NodoHash.setNext(cabeza);
-            arreglo[arregloIndice] = NodoHash;
             System.out.println("PRIMER ELEMENTO GUARDADO");
         } else {
-            while (cabeza != null) {
-                if (cabeza.getValue().getTitle().equals(Nodo.getTitle())) {
+            boolean existe = false;
+            NodoListaSecun primero = cabeza.getFirst();
+            while ((primero != null) && !(existe)) {
+                if ((primero.getTitle()).equals(Nodo.getTitle())) {
                     JOptionPane.showMessageDialog(null, "El artículo: '" + Nodo.getTitle() + "' ya se encuentra en la base de datos.");
-                    return;
+                    existe = true;
                 }
-                if (cabeza.getNext() == null) {
-                    break;
-                }
-                cabeza = cabeza.getNext();
+                primero = primero.getNext();
             }
-            cabeza.getValue().setNext(Nodo);
-            System.out.println("HUBO COLISION, GUARDADO");
+            if (!(existe)) {
+                cabeza.insertarFinal(Nodo);
+                System.out.println("HUBO COLISION, GUARDADO");
+            }
         }
     }
 
@@ -67,16 +69,21 @@ public class HashTableSecun {
 
     public NodoListaSecun Encontrar(NodoListaSecun Nodo) {
         int arregloIndice = getArregloIndice(Nodo);
-        HashNodeSecun cabeza = arreglo[arregloIndice];
-        while (cabeza != null) {
-            if (cabeza.getValue().getTitle().equals(Nodo.getTitle())) {
-                System.out.println("ENCONTRADO 1");
-                System.out.println(cabeza.getValue().getTitle());
-                System.out.println();
-                return cabeza.getValue();
+        System.out.println(arregloIndice);
+        ListaSecun cabeza = arreglo[arregloIndice];
+        if (!(cabeza.esVacio())) {
+            NodoListaSecun primero = cabeza.getFirst();
+            while (primero != null) {
+                if (primero.getTitle().equals(Nodo.getTitle())) {
+                    System.out.println("ENCONTRADO");
+                    System.out.println(primero.getTitle());
+                    System.out.println();
+                    return primero;
+                }
+                primero = primero.getNext();
             }
-            System.out.println(cabeza.getValue().getTitle());
-            cabeza = cabeza.getNext();
+            JOptionPane.showMessageDialog(null, "El artículo: '" + Nodo.getTitle() + "', no se encuentra en la base de datos.");
+            return null;
         }
         JOptionPane.showMessageDialog(null, "El artículo: '" + Nodo.getTitle() + "', no se encuentra en la base de datos.");
         return null;

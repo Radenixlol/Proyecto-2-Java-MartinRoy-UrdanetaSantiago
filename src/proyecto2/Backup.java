@@ -55,10 +55,11 @@ public class Backup {
 
     /**
      * @author Roy Martin
+     * @param table
      * @deprecated: Hace una clasificación de los datos obtenidos en la lectura
      * y los asigna a los lugares respectivos del nodo
      */
-    public void lectura_nueva() {
+    public void lectura_nueva(HashTablePrinc table) {
         String texto = this.Seleccionador_lectura();
         if (!"".equals(texto)) {
             String[] datos = texto.split("\n");
@@ -66,10 +67,14 @@ public class Backup {
             boolean at = false;
             boolean rs = false;
             boolean cl = false;
+            String title = "";
+            String[] authors = {};
+            String text = "";
+            String[] key_words = {};
             for (int i = 0; i < datos.length; i++) {
                 if (tt) {
                     if ((!"".equals(datos[i])) && (!" ".equals(datos[i]))) {
-                        String title = datos[i];
+                        title = datos[i];
                         tt = false;
                         at = true;
                     }
@@ -82,14 +87,14 @@ public class Backup {
                             authorstemp += ";";
                             i += 1;
                         }
-                        String[] authors = authorstemp.split(";");
+                        authors = authorstemp.split(";");
                         at = false;
                         rs = true;
                     }
                 } else if (rs) {
                     if ("Resumen".equals(datos[i])) {
                         i += 1;
-                        String text = datos[i];
+                        text = datos[i];
                         rs = false;
                         cl = true;
                     }
@@ -102,10 +107,13 @@ public class Backup {
                             temp3 += temp2[j];
                             temp3 += ",";
                         }
-                        String[] keys = temp3.split(",");
+                        key_words = temp3.split(",");
+                        cl = false;
                     }
                 }
             }
+            NodoListaPrinc article = new NodoListaPrinc(title, text, authors, key_words);
+            table.Agregar(article);
         } 
     }
     
