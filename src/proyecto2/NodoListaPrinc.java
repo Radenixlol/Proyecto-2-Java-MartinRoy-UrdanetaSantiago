@@ -23,14 +23,14 @@ public class NodoListaPrinc {
         this.authors = authors;
         this.key_words = key_words;
     }
-    
+
     /**
      * @return the next
      */
     public NodoListaPrinc getNext() {
         return next;
     }
-
+    
     /**
      * @param next the next to set
      */

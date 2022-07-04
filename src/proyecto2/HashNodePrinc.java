@@ -11,21 +11,11 @@ package proyecto2;
  */
 public class HashNodePrinc {
 
-    private Integer key;
     private NodoListaPrinc value;
     private HashNodePrinc next;
 
     public HashNodePrinc(NodoListaPrinc value) {
         this.value = value;
-        this.key = null;
-    }
-
-    public Integer getKey() {
-        return key;
-    }
-
-    public void setKey(Integer key) {
-        this.key = key;
     }
 
     public NodoListaPrinc getValue() {

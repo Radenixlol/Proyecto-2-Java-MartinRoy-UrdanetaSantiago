@@ -24,7 +24,7 @@ public class NodoListaSecun {
     public NodoListaSecun getNext() {
         return next;
     }
-
+    
     public void setNext(NodoListaSecun next) {
         this.next = next;
     }

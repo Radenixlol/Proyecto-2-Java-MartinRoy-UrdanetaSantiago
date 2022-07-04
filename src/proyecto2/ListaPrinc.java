@@ -6,7 +6,7 @@ package proyecto2;
 
 /**
  *
- * @author Roy Martin
+ * @author Santiago Urdaneta
  */
 public class ListaPrinc {
 

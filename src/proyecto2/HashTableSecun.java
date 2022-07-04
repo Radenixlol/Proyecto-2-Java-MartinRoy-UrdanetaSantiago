@@ -29,22 +29,29 @@ public class HashTableSecun {
     public void Agregar(NodoListaSecun Nodo) {
         int arregloIndice = getArregloIndice(Nodo);
         HashNodeSecun cabeza = arreglo[arregloIndice];
-        while (cabeza != null) {
-            if (cabeza.getKey().equals(arregloIndice)) {
-                cabeza.getValue().setNext(Nodo);
-                return;
-
+        if (cabeza == null) {
+            tamaño++;
+            ListaSecun Lista = new ListaSecun();
+            Lista.insertarFinal(Nodo);
+            cabeza = arreglo[arregloIndice];
+            HashNodeSecun NodoHash = new HashNodeSecun(Nodo);
+            NodoHash.setNext(cabeza);
+            arreglo[arregloIndice] = NodoHash;
+            System.out.println("PRIMER ELEMENTO GUARDADO");
+        } else {
+            while (cabeza != null) {
+                if (cabeza.getValue().getTitle().equals(Nodo.getTitle())) {
+                    JOptionPane.showMessageDialog(null, "El artículo: '" + Nodo.getTitle() + "' ya se encuentra en la base de datos.");
+                    return;
+                }
+                if (cabeza.getNext() == null) {
+                    break;
+                }
+                cabeza = cabeza.getNext();
             }
-            cabeza = cabeza.getNext();
+            cabeza.getValue().setNext(Nodo);
+            System.out.println("HUBO COLISION, GUARDADO");
         }
-        tamaño++;
-        ListaSecun Lista = new ListaSecun();
-        Lista.insertarFinal(Nodo);
-        cabeza = arreglo[arregloIndice];
-        HashNodeSecun NodoHash = new HashNodeSecun(Nodo);
-        NodoHash.setNext(cabeza);
-        arreglo[arregloIndice] = NodoHash;
-
     }
 
     public int getArregloIndice(NodoListaSecun Nodo) {
@@ -55,8 +62,6 @@ public class HashTableSecun {
             ascii = ascii + (int) caracter;
         }
         int key = ascii % capacidad;
-        HashNodeSecun NodoHash = new HashNodeSecun(Nodo);
-        NodoHash.setKey(key);
         return key;
     }
 
@@ -64,16 +69,16 @@ public class HashTableSecun {
         int arregloIndice = getArregloIndice(Nodo);
         HashNodeSecun cabeza = arreglo[arregloIndice];
         while (cabeza != null) {
-            if (cabeza.getKey().equals(getArregloIndice(Nodo))) {
-                if (cabeza.getValue().getTitle().equals(Nodo.getTitle())) {
-//                    imprimirNodo(cabeza);
-                    System.out.println(cabeza.getValue().getTitle() + cabeza.getValue().getElementos());
-                    return cabeza.getValue();
-                }
+            if (cabeza.getValue().getTitle().equals(Nodo.getTitle())) {
+                System.out.println("ENCONTRADO 1");
+                System.out.println(cabeza.getValue().getTitle());
+                System.out.println();
+                return cabeza.getValue();
             }
+            System.out.println(cabeza.getValue().getTitle());
             cabeza = cabeza.getNext();
         }
-        System.out.println("No existe");
+        JOptionPane.showMessageDialog(null, "El artículo: '" + Nodo.getTitle() + "', no se encuentra en la base de datos.");
         return null;
     }
 }
