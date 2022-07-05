@@ -8,13 +8,13 @@ import javax.swing.JOptionPane;
  */
 public class HashTableSecun {
 
-    private HashNodeSecun[] arreglo;
+    private ListaSecun[] arreglo;
     private int capacidad;
     private int tamaño;
 
     public HashTableSecun() {
         this.capacidad = 401;
-        arreglo = new HashNodeSecun[capacidad];
+        arreglo = new ListaSecun[capacidad];
         this.tamaño = 0;
     }
 
@@ -26,36 +26,52 @@ public class HashTableSecun {
         return tamaño == 0;
     }
 
-    public void Agregar(NodoListaSecun Nodo) {
-        int arregloIndice = getArregloIndice(Nodo);
-        HashNodeSecun cabeza = arreglo[arregloIndice];
-        if (cabeza == null) {
+    public void Agregar(String object, String title) {
+        int arregloIndice = getArregloIndice(object);
+        ListaSecun Lista = arreglo[arregloIndice];
+        if (Lista.esVacio()) {
+            NodoListaSecun Nodo1 = new NodoListaSecun(object);
+            NodoListaString elemento = new NodoListaString(title);
+            Nodo1.elementos.insertarFinal(elemento);
+            Lista.insertarFinal(Nodo1);
             tamaño++;
-            ListaSecun Lista = new ListaSecun();
-            Lista.insertarFinal(Nodo);
-            cabeza = arreglo[arregloIndice];
-            HashNodeSecun NodoHash = new HashNodeSecun(Nodo);
-            NodoHash.setNext(cabeza);
-            arreglo[arregloIndice] = NodoHash;
             System.out.println("PRIMER ELEMENTO GUARDADO");
         } else {
-            while (cabeza != null) {
-                if (cabeza.getValue().getTitle().equals(Nodo.getTitle())) {
-                    JOptionPane.showMessageDialog(null, "El artículo: '" + Nodo.getTitle() + "' ya se encuentra en la base de datos.");
-                    return;
+            boolean existe1 = false;
+            NodoListaSecun primero = Lista.getFirst();
+            while ((primero != null) && !(existe1)) {
+                if ((primero.getObject()).equals(object)) {
+                    System.out.println("El dato ya fue añadido anteriormente");
+                    boolean existe2 = false;
+                    ListaString titulo0 = primero.elementos;
+                    NodoListaString titulo = titulo0.getFirst();
+                    while ((titulo != null) && !(existe2)) {
+                        if ((titulo.getElemento()).equals(title)) {
+                            JOptionPane.showMessageDialog(null, "El dato: '" + object + "' y el título: '" + title + "' ya se encuentran vinculados.");
+                            existe2 = true;
+                        }
+                        titulo = titulo.getNext();
+                    }
+                    if (!(existe2)) {
+                        NodoListaString elemento = new NodoListaString(title);
+                        titulo0.insertarFinal(elemento);
+                        JOptionPane.showMessageDialog(null, "El título: '" + title + "' fue vinculado al dato: '" + object + "'");
+                    }
+                    existe1 = true;
                 }
-                if (cabeza.getNext() == null) {
-                    break;
-                }
-                cabeza = cabeza.getNext();
+                primero = primero.getNext();
             }
-            cabeza.getValue().setNext(Nodo);
-            System.out.println("HUBO COLISION, GUARDADO");
+            if (!(existe1)) {
+                NodoListaSecun Nodo1 = new NodoListaSecun(object);
+                NodoListaString elemento = new NodoListaString(title);
+                Nodo1.elementos.insertarFinal(elemento);
+                Lista.insertarFinal(Nodo1);
+                System.out.println("HUBO COLISION, GUARDADO");
+            }
         }
     }
 
-    public int getArregloIndice(NodoListaSecun Nodo) {
-        String title = Nodo.getTitle();
+    public int getArregloIndice(String title) {
         int ascii = 0;
         for (int i = 0; i < title.length(); i++) {
             char caracter = title.charAt(i);
@@ -65,20 +81,26 @@ public class HashTableSecun {
         return key;
     }
 
-    public NodoListaSecun Encontrar(NodoListaSecun Nodo) {
-        int arregloIndice = getArregloIndice(Nodo);
-        HashNodeSecun cabeza = arreglo[arregloIndice];
-        while (cabeza != null) {
-            if (cabeza.getValue().getTitle().equals(Nodo.getTitle())) {
-                System.out.println("ENCONTRADO 1");
-                System.out.println(cabeza.getValue().getTitle());
-                System.out.println();
-                return cabeza.getValue();
+    public String Encontrar(String object) {
+        int arregloIndice = getArregloIndice(object);
+        ListaSecun Lista = arreglo[arregloIndice];
+        if (!(Lista.esVacio())) {
+            NodoListaSecun primero = Lista.getFirst();
+            while (primero != null) {
+                if (primero.getObject().equals(object)) {
+                    NodoListaString datos = primero.elementos.getFirst();
+                    String cadena = "";
+                    while (datos != null) {
+                        cadena += datos.getElemento();
+                        cadena += ",";
+                        datos = datos.getNext();
+                    }
+                    return cadena;
+                }
+                primero = primero.getNext();
             }
-            System.out.println(cabeza.getValue().getTitle());
-            cabeza = cabeza.getNext();
         }
-        JOptionPane.showMessageDialog(null, "El artículo: '" + Nodo.getTitle() + "', no se encuentra en la base de datos.");
+        JOptionPane.showMessageDialog(null, "El dato: '" + object + "', no se encuentra en la base de datos.");
         return null;
     }
 }

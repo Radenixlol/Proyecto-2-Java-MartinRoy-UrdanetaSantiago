@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package proyecto2;
 
@@ -8,12 +9,12 @@ package proyecto2;
  *
  * @author Santiago Urdaneta
  */
-public class ListaPrinc {
+public class ListaString {
 
-    private NodoListaPrinc first, last;
+    private NodoListaString first, last;
     private int size;
 
-    public ListaPrinc() {
+    public ListaString() {
         this.first = null;
         this.last = null;
         this.size = 0;
@@ -23,43 +24,42 @@ public class ListaPrinc {
         return first == null;
     }
 
-    public void insertarFinal(NodoListaPrinc NodoNuevo) {  
-        if(esVacio()) {  
-            first = NodoNuevo;  
-            last = NodoNuevo;  
-        }  
-        else {  
+    public void insertarFinal(NodoListaString NodoNuevo) {
+        if (esVacio()) {
+            first = NodoNuevo;
+            last = NodoNuevo;
+        } else {
             last.setNext(NodoNuevo);
-            last = NodoNuevo; 
-        }  
+            last = NodoNuevo;
+        }
         size++;
-    }  
+    }
 
     /**
      * @return the first
      */
-    public NodoListaPrinc getFirst() {
+    public NodoListaString getFirst() {
         return first;
     }
 
     /**
      * @param first the first to set
      */
-    public void setFirst(NodoListaPrinc first) {
+    public void setFirst(NodoListaString first) {
         this.first = first;
     }
 
     /**
      * @return the last
      */
-    public NodoListaPrinc getLast() {
+    public NodoListaString getLast() {
         return last;
     }
 
     /**
      * @param last the last to set
      */
-    public void setLast(NodoListaPrinc last) {
+    public void setLast(NodoListaString last) {
         this.last = last;
     }
 

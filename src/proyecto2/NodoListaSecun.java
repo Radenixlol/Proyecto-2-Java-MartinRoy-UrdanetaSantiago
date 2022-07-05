@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyecto2;
 
 /**
@@ -12,13 +7,13 @@ package proyecto2;
 public class NodoListaSecun {
 
     private NodoListaSecun next;
-    private String[] elementos;
-    private String title;
+    protected ListaString elementos;
+    private String object;
 
-    public NodoListaSecun(String[] elementos) {
+    public NodoListaSecun(String object) {
         this.next = null;
-        this.elementos = elementos;
-        this.title = title;
+        this.elementos = new ListaString();
+        this.object = object;
     }
 
     public NodoListaSecun getNext() {
@@ -29,20 +24,20 @@ public class NodoListaSecun {
         this.next = next;
     }
 
-    public String[] getElementos() {
+    public ListaString getElementos() {
         return elementos;
     }
 
-    public void setElementos(String[] elementos) {
+    public void setElementos(ListaString elementos) {
         this.elementos = elementos;
     }
 
-    public String getTitle() {
-        return title;
+    public String getObject() {
+        return object;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setObject(String object) {
+        this.object = object;
     }
 
 }

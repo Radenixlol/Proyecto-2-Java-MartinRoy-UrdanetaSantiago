@@ -25,16 +25,16 @@ public class ListaSecun {
     }
 
     public void insertarFinal(NodoListaSecun NodoNuevo) {
-        if (first == null) {
+        if (esVacio()) {
             first = NodoNuevo;
             last = NodoNuevo;
         } else {
-            NodoNuevo = last.getNext();
+            last.setNext(NodoNuevo);
             last = NodoNuevo;
         }
         size++;
     }
-    
+
     /**
      * @return the first
      */
