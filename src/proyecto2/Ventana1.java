@@ -372,7 +372,9 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         String object = name_author.getText();
         String cadena = autores.Encontrar(object);
+//        System.out.println(cadena);
         String[] boxauthor = cadena.split(",");
+        ListaAutor.removeAllItems();
         for (int i = 0; i < boxauthor.length; i++) {
             ListaAutor.insertItemAt(boxauthor[i], i);
         }
@@ -383,9 +385,11 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         String object = name_key.getText();
         String cadena = palabras.Encontrar(object);
+//        System.out.println(cadena);
         String[] boxpalabras = cadena.split(",");
+        ListaClave.removeAllItems();
         for (int i = 0; i < boxpalabras.length; i++) {
-            ListaAutor.insertItemAt(boxpalabras[i], i);
+            ListaClave.insertItemAt(boxpalabras[i], i);
         }
         ListaClave.setEnabled(true);
     }//GEN-LAST:event_Combo_up3ActionPerformed
@@ -401,7 +405,6 @@ public class Ventana1 extends javax.swing.JFrame {
         ListaAutor.setEnabled(false);
         ListaClave.setEnabled(false);
         ListaGeneral.setEnabled(false);
-        save.setEnabled(true);
     }//GEN-LAST:event_DataActionPerformed
 
     private void TextNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextNewActionPerformed

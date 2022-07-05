@@ -25,7 +25,7 @@ public class ListaSecun {
     }
 
     public void insertarFinal(NodoListaSecun NodoNuevo) {
-        if (first == null) {
+        if (esVacio()) {
             first = NodoNuevo;
             last = NodoNuevo;
         } else {
@@ -33,6 +33,13 @@ public class ListaSecun {
             last = NodoNuevo;
         }
         size++;
+    }
+
+    public void ordenarAlfabeticamente() {
+        if (esVacio()) {
+        } else {
+            
+        }
     }
 
     /**
