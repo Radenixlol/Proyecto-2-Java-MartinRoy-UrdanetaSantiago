@@ -9,7 +9,12 @@ package proyecto2;
  * @author Radenixlol
  */
 public class Ventana1 extends javax.swing.JFrame {
+
     Backup B = new Backup();
+    HashTablePrinc tabla = new HashTablePrinc();
+    HashTableSecun autores = new HashTableSecun();
+    HashTableSecun palabras = new HashTableSecun();
+
     /**
      * Creates new form Ventana3
      */
@@ -18,6 +23,7 @@ public class Ventana1 extends javax.swing.JFrame {
         ListaAutor.setEnabled(false);
         ListaClave.setEnabled(false);
         ListaGeneral.setEnabled(false);
+        save.setEnabled(false);
     }
 
     /**
@@ -39,6 +45,8 @@ public class Ventana1 extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        save = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
         Search = new javax.swing.JPanel();
         ListaGeneral = new javax.swing.JComboBox<>();
         Combo_up1 = new javax.swing.JButton();
@@ -88,33 +96,46 @@ public class Ventana1 extends javax.swing.JFrame {
 
         jLabel8.setText("Nota: la base de datos se llama data.txt");
 
+        save.setText("Guardar");
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("Guardar información actual");
+
         javax.swing.GroupLayout UpdateLayout = new javax.swing.GroupLayout(Update);
         Update.setLayout(UpdateLayout);
         UpdateLayout.setHorizontalGroup(
             UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(UpdateLayout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(Data)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(TextNew)
-                .addGap(82, 82, 82))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdateLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(139, 139, 139))
             .addGroup(UpdateLayout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(66, 66, 66))
-            .addGroup(UpdateLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6))
-                .addContainerGap(84, Short.MAX_VALUE))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addContainerGap(81, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdateLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(Data)
+                .addGap(83, 83, 83)
+                .addComponent(save)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TextNew)
+                .addGap(50, 50, 50))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdateLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel14)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel2)
+                .addGap(36, 36, 36))
         );
         UpdateLayout.setVerticalGroup(
             UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,11 +149,13 @@ public class Ventana1 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel14))
                 .addGap(33, 33, 33)
                 .addGroup(UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Data)
-                    .addComponent(TextNew))
+                    .addComponent(TextNew)
+                    .addComponent(save))
                 .addGap(28, 28, 28)
                 .addComponent(jLabel8)
                 .addGap(21, 21, 21))
@@ -171,20 +194,17 @@ public class Ventana1 extends javax.swing.JFrame {
                     .addGroup(SearchLayout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addGroup(SearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(SearchLayout.createSequentialGroup()
-                                .addGroup(SearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel10))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
                             .addGroup(SearchLayout.createSequentialGroup()
                                 .addComponent(Combo_up1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(Combo_search1))))
                     .addGroup(SearchLayout.createSequentialGroup()
-                        .addContainerGap(48, Short.MAX_VALUE)
+                        .addContainerGap(47, Short.MAX_VALUE)
                         .addComponent(ListaGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         SearchLayout.setVerticalGroup(
             SearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,6 +243,11 @@ public class Ventana1 extends javax.swing.JFrame {
         });
 
         name_key.setText("Introduzca la palabra clave");
+        name_key.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                name_keyActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Búsqueda por autor:");
 
@@ -269,7 +294,7 @@ public class Ventana1 extends javax.swing.JFrame {
                                     .addGap(123, 123, 123)))
                             .addComponent(name_author, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ListaAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addGroup(FilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(name_key, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
@@ -345,11 +370,23 @@ public class Ventana1 extends javax.swing.JFrame {
 
     private void Combo_up2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo_up2ActionPerformed
         // TODO add your handling code here:
+        String object = name_author.getText();
+        String cadena = autores.Encontrar(object);
+        String[] boxauthor = cadena.split(",");
+        for (int i = 0; i < boxauthor.length; i++) {
+            ListaAutor.insertItemAt(boxauthor[i], i);
+        }
         ListaAutor.setEnabled(true);
     }//GEN-LAST:event_Combo_up2ActionPerformed
 
     private void Combo_up3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo_up3ActionPerformed
         // TODO add your handling code here:
+        String object = name_key.getText();
+        String cadena = palabras.Encontrar(object);
+        String[] boxpalabras = cadena.split(",");
+        for (int i = 0; i < boxpalabras.length; i++) {
+            ListaAutor.insertItemAt(boxpalabras[i], i);
+        }
         ListaClave.setEnabled(true);
     }//GEN-LAST:event_Combo_up3ActionPerformed
 
@@ -360,19 +397,30 @@ public class Ventana1 extends javax.swing.JFrame {
 
     private void DataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataActionPerformed
         // TODO add your handling code here:
+        B.lectura_data(tabla, autores, palabras);
         ListaAutor.setEnabled(false);
         ListaClave.setEnabled(false);
         ListaGeneral.setEnabled(false);
-        B.lectura_data();
+        save.setEnabled(true);
     }//GEN-LAST:event_DataActionPerformed
 
     private void TextNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextNewActionPerformed
         // TODO add your handling code here:
+        B.lectura_nueva(tabla, autores, palabras);
         ListaAutor.setEnabled(false);
         ListaClave.setEnabled(false);
         ListaGeneral.setEnabled(false);
-        B.lectura_nueva();
+        save.setEnabled(true);
     }//GEN-LAST:event_TextNewActionPerformed
+
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+        // TODO add your handling code here:
+        B.Escritura(tabla);
+    }//GEN-LAST:event_saveActionPerformed
+
+    private void name_keyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_keyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_name_keyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -430,6 +478,7 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -441,5 +490,6 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField name_author;
     private javax.swing.JTextField name_key;
+    private javax.swing.JButton save;
     // End of variables declaration//GEN-END:variables
 }

@@ -23,7 +23,7 @@ public class Backup {
 
     /**
      * @author Roy Martin
-     * @return 
+     * @return
      * @deprecated: Selecciona el archivo txt para leerlo y usar sus datos
      * posteriormente
      */
@@ -51,15 +51,15 @@ public class Backup {
         return texto;
     }
 
-
-
     /**
      * @author Roy Martin
-     * @param table
+     * @param tabla
+     * @param autores
+     * @param palabras
      * @deprecated: Hace una clasificación de los datos obtenidos en la lectura
      * y los asigna a los lugares respectivos del nodo
      */
-    public void lectura_nueva(HashTablePrinc table) {
+    public void lectura_nueva(HashTablePrinc tabla, HashTableSecun autores, HashTableSecun palabras) {
         String texto = this.Seleccionador_lectura();
         if (!"".equals(texto)) {
             String[] datos = texto.split("\n");
@@ -112,157 +112,137 @@ public class Backup {
                     }
                 }
             }
-            NodoListaPrinc article = new NodoListaPrinc(title, text, authors, key_words);
-            table.Agregar(article);
-        } 
+            int[] reps = new int[key_words.length];
+            for (int i = 0; i < key_words.length; i++) {
+                int cantidad = 0;
+                for (int j = 0; j < text.length(); j++) {
+                    if (text.substring(j).startsWith(key_words[i])) {
+                        cantidad++;
+                    }
+                }
+                reps[i] = cantidad;
+            }
+
+            NodoListaPrinc article = new NodoListaPrinc(title, text, authors, key_words, reps);
+            boolean avaible = tabla.Agregar(article);
+            if (avaible) {
+                for (int i = 0; i < authors.length; i++) {
+                    autores.Agregar(authors[i], title);
+                }
+                for (int i = 0; i < key_words.length; i++) {
+                    palabras.Agregar(key_words[i], title);
+                }
+            }
+        }
     }
-    
+
     /**
- * @author Roy Martin
- * @deprecated: Hace una clasificación de los datos obtenidos en la lectura y los asigna a los lugares respectivos del grafo
- */
-    public void lectura_data() {
+     * @author Roy Martin
+     * @param tabla
+     * @param autores
+     * @param palabras
+     * @deprecated: Hace una clasificación de los datos obtenidos en la lectura
+     * y los asigna a los lugares respectivos del grafo
+     */
+    public void lectura_data(HashTablePrinc tabla, HashTableSecun autores, HashTableSecun palabras) {
         String data = this.Seleccionador_lectura();
         if (!"".equals(data)) {
             String pt = "%°%";
             String[] datos = data.split(pt);
-            for (int i = 0; i < datos.length-1; i++) {
+            for (int i = 0; i < datos.length - 1; i++) {
                 String[] nodito;
                 nodito = datos[i].split("\n\n");
                 System.out.println(nodito.length);
                 String title = nodito[0];
                 String[] authors = nodito[1].split(";");
                 String text = nodito[2];
-                String[] keys = nodito[3].split(";");
+                String[] key_words = nodito[3].split(";");
                 //escribir método de asignación al hash table
+                int[] reps = new int[key_words.length];
+                for (int j = 0; j < key_words.length; j++) {
+                    int cantidad = 0;
+                    for (int k = 0; k < text.length(); k++) {
+                        if (text.substring(k).startsWith(key_words[j])) {
+                            cantidad++;
+                        }
+                    }
+                    reps[j] = cantidad;
+                }
+
+                NodoListaPrinc article = new NodoListaPrinc(title, text, authors, key_words, reps);
+                boolean avaible = tabla.Agregar(article);
+                if (avaible) {
+                    for (int j = 0; j < authors.length; j++) {
+                        autores.Agregar(authors[j], title);
+                    }
+                    for (int j = 0; j < key_words.length; j++) {
+                        palabras.Agregar(key_words[j], title);
+                    }
+                }
                 System.out.println(title);
-                for(int j = 0; j < authors.length; j++){
+                for (int j = 0; j < authors.length; j++) {
                     System.out.println(authors[j]);
                 }
                 System.out.println(text);
-                for(int j = 0; j < keys.length; j++){
-                    System.out.println(keys[j]);
+                for (int j = 0; j < key_words.length; j++) {
+                    System.out.println(key_words[j]);
                 }
             }
-            System.out.println("carga lista");
+            System.out.println("Carga completada");
         }
     }
-    
-///**
-// * @author Roy Martin
-// * @deprecated: Se encarga de procesar la lista de productos de cada almacen y retornarlo
-// * @param arr_productos Un arreglo de productos y cantidades
-// * @param i Valor númerico para ubicar el valor del arreglo arr_productos
-// * @return Retorna una lista de productos
-// */
-//    public ListaProd clasificacionAlm(String[] arr_productos, int i) {
-//        ListaProd lista = new ListaProd();
-//        String product = String.valueOf(arr_productos[i]);
-//        String[] producto = (product.replace(",", " ")).split(" ");
-//
-//        for (int j = 2; j < producto.length; j += 2) {
-//            lista.insertar(Integer.parseInt(producto[j + 1]), producto[j]);
-//        }
-//        return lista;
-//    }
-///**
-// * @author Roy Martin
-// * @deprecated: Carga todas las rutas del grafo
-// * @param datos Arreglo de Strings con la información principal del txt
-// * @param fin_alm Valor númerico para diferenciar lo que hay antes de las rutas y después de ellas
-// * @param g el grafo a donde se cargarán los datos
-// */
-//    public void clasificacionRuta(String[] datos, int fin_alm, Grafo g) {
-//        for (int i = fin_alm + 1; i < datos.length; i++) {
-//            String rutas = String.valueOf(datos[i]);
-//            String[] ruta = rutas.split(",");
-//            g.cargarRuta((ruta[0]).charAt(0), (ruta[1]).charAt(0), Integer.parseInt(ruta[2]));
-//        }
-//    }
-///**
-// * @author: Roy Martin
-// * @deprecated: Se encarga de calcular cuantas líneas hay antes de la sección de Rutas
-// * @param datos Arreglo de Strings
-// * @return un valor númerico
-// */
-//    public int final_list(String[] datos) {
-//        int fin_alm;
-//        for (int i = 0; i < datos.length; i++) {
-//            if (datos[i].equals("Rutas;")) {
-//                fin_alm = i;
-//                return fin_alm;
-//            }
-//        }
-//        return 0;
-//
-//    }
-///**
-// * @author: Roy Martin
-// * @deprecated: Calcula la cantidad de almacenes que hay
-// * @param texto String
-// * @return un valor numérico
-// */
-//    public int num_alm(String texto) {
-//        String[] cantidad = texto.split("Almacen");
-//        return cantidad.length;
-//    }
-///**
-// * @author: Roy Martin
-// * @deprecated: Es el procedimiento de escritura de archivos, extrae todos los datos de un grafo para guardarlo en un txt para ser usado posteriormente
-// * @param g Grafo del cuál se extraerán los datos a guardar
-//
-// */
-//    public void escritura(Grafo g) {
-//        String info = "";
-//        ListaAlm Almacenes = g.getAlmacenes();
-//        if (!Almacenes.esVacio()) {
-//            info += "Almacenes;" + "\n";
-//            Almacen almacen = Almacenes.getPfirst();
-//            int i = 0;
-//            while (almacen != null) {
-//                info += "Almacen " + (char)(i+65) + ":" + "\n";
-//                ListaProd productos = almacen.getProductos();
-//                Producto producto = productos.getPfirst();
-//                Producto producto_final = productos.getPlast();
-//                while (producto != null) {
-//                    if (producto == producto_final) {
-//                        String nombre = producto.getNombre();
-//                        int cantidad_num = producto.getCantidad();
-//                        String cantidad = String.valueOf(cantidad_num);
-//                        info += nombre + "," +cantidad + ";" + "\n";
-//                        producto = producto.getNext();
-//                        System.out.println("almacen");
-//                    } else {
-//                        String nombre = producto.getNombre();
-//                        int cantidad_num = producto.getCantidad();                      
-//                        info += nombre + "," +cantidad_num + "\n";
-//                        producto = producto.getNext();
-//                        System.out.println("almacen");
-//                    }
-//                }
-//                almacen = almacen.getNext();
-//                i++;
-//            }
-//            int[][] rutas = g.getRutas();
-//            info += "Rutas;" + "\n";
-//            for (int j = 0; j < g.getMax(); j++){
-//                for (int k = 0; k < g.getMax(); k++){
-//                    if((rutas[j][k])!=0){
-//                        System.out.println(rutas[j][k]);
-//                        info += (char)(j+65) + "," + (char)(k+65) + "," + rutas[j][k] + "\n";
-//                    }
-//                }
-//            }
-//        }
-//        try{
-//            PrintWriter pw = new PrintWriter(archivo);
-//            pw.print(info);
-//            pw.close();
-//            JOptionPane.showMessageDialog(null, "Guardado exitoso.");
-//        }catch(Exception e){
-//            JOptionPane.showMessageDialog(null, "Error en el guardado de datos.");
-//        }
-//        
-//    }
-//    
+
+    /**
+     * @param tabla
+     * @author: Roy Martin
+     * @deprecated: Es el procedimiento de escritura de archivos, extrae todos
+     * los datos de un grafo para guardarlo en un txt para ser usado
+     * posteriormente
+     *
+     */
+    public void Escritura(HashTablePrinc tabla) {
+        String info = "";
+        ListaPrinc[] arreglos = tabla.getArreglo();
+        for (int i = 0; i < arreglos.length; i++) {
+            ListaPrinc lista = arreglos[i];
+            if (!lista.esVacio()) {
+                NodoListaPrinc cabeza = lista.getFirst();
+                while (cabeza != null) {
+                    info += cabeza.getTitle();
+                    info += "\n\n";
+                    String[] autores = cabeza.getAuthors();
+                    for (int j = 0; j < autores.length; j++) {
+                        info += autores[j];
+                        info += ";";
+                    }
+                    info += "\n\n";
+                    info += cabeza.getText();
+                    info += "\n\n";
+                    String[] key_words = cabeza.getKey_words();
+                    for (int j = 0; j < key_words.length; j++) {
+                        info += key_words[j];
+                        info += ";";
+                    }
+                    info += "%°%";
+                    info += "\n";
+                    cabeza = cabeza.getNext();
+                }
+            }
+        }
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+        jfc.setFileFilter(filtro);
+        int selec = jfc.showOpenDialog(null);
+        if (selec == JFileChooser.APPROVE_OPTION) {
+            this.archivo = jfc.getSelectedFile();
+            try {
+                PrintWriter pw = new PrintWriter(archivo);
+                pw.print(info);
+                pw.close();
+                JOptionPane.showMessageDialog(null, "Guardado exitoso.");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en el guardado de datos.");
+            }
+        }
+    }
+
 }
