@@ -35,6 +35,13 @@ public class ListaSecun {
         size++;
     }
 
+    public void ordenarAlfabeticamente() {
+        if (esVacio()) {
+        } else {
+            
+        }
+    }
+
     /**
      * @return the first
      */

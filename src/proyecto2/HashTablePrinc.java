@@ -12,16 +12,32 @@ public class HashTablePrinc {
     private int capacidad;
     private int tamaño;
 
+    /**
+     * @author: Santiago Urdaneta
+     * @deprecated: constructor de la Tabla de Dispersión
+     */
     public HashTablePrinc() {
         this.capacidad = 401;
         arreglo = new ListaPrinc[capacidad];
         this.tamaño = 0;
     }
 
+    /**
+     * @author: Santiago Urdaneta
+     * @deprecated: conocer si la TablaHash está vacía
+     * @return: booleano
+     */
     public boolean EsVacio() {
         return tamaño == 0;
     }
 
+    /**
+     * @author Santiago Urdaneta
+     * @param Nodo el cual se agregará a la TablaHash
+     * @deprecated: Evalua si la key donde se insertará el nodo está vacía o no, si esta se
+     * encuentra vacía, se crea una lista vacía y le inserta el nodo; en caso contrario, le 
+     * añade el nodo a insertar a la lista ya existente en esa posición (key) del la TablaHash
+     */
     public boolean Agregar(NodoListaPrinc Nodo) {
         int arregloIndice = getArregloIndice(Nodo);
         if (arreglo[arregloIndice] == null) {

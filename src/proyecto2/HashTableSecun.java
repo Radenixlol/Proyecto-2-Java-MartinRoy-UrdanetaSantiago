@@ -28,8 +28,9 @@ public class HashTableSecun {
 
     public void Agregar(String object, String title) {
         int arregloIndice = getArregloIndice(object);
-        ListaSecun Lista = arreglo[arregloIndice];
-        if (Lista.esVacio()) {
+        if (arreglo[arregloIndice] == null) {
+            arreglo[arregloIndice] = new ListaSecun();
+            ListaSecun Lista = arreglo[arregloIndice];
             NodoListaSecun Nodo1 = new NodoListaSecun(object);
             NodoListaString elemento = new NodoListaString(title);
             Nodo1.elementos.insertarFinal(elemento);
@@ -38,6 +39,7 @@ public class HashTableSecun {
             System.out.println("PRIMER ELEMENTO GUARDADO");
         } else {
             boolean existe1 = false;
+            ListaSecun Lista = arreglo[arregloIndice];
             NodoListaSecun primero = Lista.getFirst();
             while ((primero != null) && !(existe1)) {
                 if ((primero.getObject()).equals(object)) {
