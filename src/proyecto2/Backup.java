@@ -204,8 +204,8 @@ public class Backup {
         String info = "";
         ListaPrinc[] arreglos = tabla.getArreglo();
         for (int i = 0; i < arreglos.length; i++) {
-            ListaPrinc lista = arreglos[i];
-            if (!lista.esVacio()) {
+            if (arreglos[i] != null) {
+                ListaPrinc lista = arreglos[i];
                 NodoListaPrinc cabeza = lista.getFirst();
                 while (cabeza != null) {
                     info += cabeza.getTitle();

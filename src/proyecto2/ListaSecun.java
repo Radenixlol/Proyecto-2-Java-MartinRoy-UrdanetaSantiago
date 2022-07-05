@@ -14,16 +14,30 @@ public class ListaSecun {
     private NodoListaSecun first, last;
     private int size;
 
+    /**
+     * @author: Santiago Urdaneta
+     * @deprecated: constructor de la lista
+     */
     public ListaSecun() {
         this.first = null;
         this.last = null;
         this.size = 0;
     }
 
+    /**
+     * @author: Santiago Urdaneta
+     * @deprecated: conocer si la lista está vacía
+     * @return: booleano
+     */
     public boolean esVacio() {
         return first == null;
     }
 
+    /**
+     * @author Santiago Urdaneta
+     * @param NodoNuevo nodo que se insertará en la lista
+     * @deprecated: se inserta el nodo al final de la lista
+     */
     public void insertarFinal(NodoListaSecun NodoNuevo) {
         if (esVacio()) {
             first = NodoNuevo;
