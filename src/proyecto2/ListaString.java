@@ -25,7 +25,7 @@ public class ListaString {
     }
 
     public void insertarFinal(NodoListaString NodoNuevo) {
-        if (first == null) {
+        if (esVacio()) {
             first = NodoNuevo;
             last = NodoNuevo;
         } else {

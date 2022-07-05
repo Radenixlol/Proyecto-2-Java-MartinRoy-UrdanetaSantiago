@@ -24,7 +24,7 @@ public class ListaPrinc {
     }
 
     public void insertarFinal(NodoListaPrinc NodoNuevo) {  
-        if(first == null) {  
+        if(esVacio()) {  
             first = NodoNuevo;  
             last = NodoNuevo;  
         }  

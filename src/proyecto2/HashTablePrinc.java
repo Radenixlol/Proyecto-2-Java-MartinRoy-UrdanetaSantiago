@@ -18,40 +18,32 @@ public class HashTablePrinc {
         this.tamaño = 0;
     }
 
-    public int Tamaño() {
-        return getTamaño();
-    }
-
     public boolean EsVacio() {
-        return getTamaño() == 0;
-    }
-
-    public void Inicio() {
-        for (int i = 0; i < this.getCapacidad(); i++) {
-            getArreglo()[i] = new ListaPrinc();
-        }
+        return tamaño == 0;
     }
 
     public boolean Agregar(NodoListaPrinc Nodo) {
         int arregloIndice = getArregloIndice(Nodo);
-        ListaPrinc cabeza = getArreglo()[arregloIndice];
-        if (cabeza.esVacio()) {
-            cabeza.insertarFinal(Nodo);
-            setTamaño(getTamaño() + 1);
+        if (arreglo[arregloIndice] == null) {
+            arreglo[arregloIndice] = new ListaPrinc();
+            ListaPrinc Lista = arreglo[arregloIndice];
+            Lista.insertarFinal(Nodo);
+            tamaño++;
             System.out.println("PRIMER ELEMENTO GUARDADO");
             return true;
         } else {
             boolean existe = false;
-            NodoListaPrinc primero = cabeza.getFirst();
+            ListaPrinc Lista = arreglo[arregloIndice];
+            NodoListaPrinc primero = Lista.getFirst();
             while ((primero != null) && !(existe)) {
-                if ((primero.getTitle()).equals(Nodo.getTitle())) {
+                if ((primero.getText()).equals(Nodo.getText())) {
                     JOptionPane.showMessageDialog(null, "El artículo: '" + Nodo.getTitle() + "' ya se encuentra en la base de datos.");
                     existe = true;
                 }
                 primero = primero.getNext();
             }
             if (!(existe)) {
-                cabeza.insertarFinal(Nodo);
+                Lista.insertarFinal(Nodo);
                 System.out.println("HUBO COLISION, GUARDADO");
                 return true;
             }
@@ -73,9 +65,9 @@ public class HashTablePrinc {
     public NodoListaPrinc Encontrar(NodoListaPrinc Nodo) {
         int arregloIndice = getArregloIndice(Nodo);
         System.out.println(arregloIndice);
-        ListaPrinc cabeza = getArreglo()[arregloIndice];
-        if (!(cabeza.esVacio())) {
-            NodoListaPrinc primero = cabeza.getFirst();
+        ListaPrinc Lista = arreglo[arregloIndice];
+        if (!(Lista.esVacio())) {
+            NodoListaPrinc primero = Lista.getFirst();
             while (primero != null) {
                 if (primero.getTitle().equals(Nodo.getTitle())) {
                     System.out.println("ENCONTRADO");
@@ -85,8 +77,6 @@ public class HashTablePrinc {
                 }
                 primero = primero.getNext();
             }
-            JOptionPane.showMessageDialog(null, "El artículo: '" + Nodo.getTitle() + "', no se encuentra en la base de datos.");
-            return null;
         }
         JOptionPane.showMessageDialog(null, "El artículo: '" + Nodo.getTitle() + "', no se encuentra en la base de datos.");
         return null;
@@ -133,5 +123,5 @@ public class HashTablePrinc {
     public void setTamaño(int tamaño) {
         this.tamaño = tamaño;
     }
-    
+
 }

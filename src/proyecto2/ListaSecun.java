@@ -25,7 +25,7 @@ public class ListaSecun {
     }
 
     public void insertarFinal(NodoListaSecun NodoNuevo) {
-        if (first == null) {
+        if (esVacio()) {
             first = NodoNuevo;
             last = NodoNuevo;
         } else {
