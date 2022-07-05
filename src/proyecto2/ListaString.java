@@ -9,12 +9,12 @@ package proyecto2;
  *
  * @author Santiago Urdaneta
  */
-public class ListaSecun {
+public class ListaString {
 
-    private NodoListaSecun first, last;
+    private NodoListaString first, last;
     private int size;
 
-    public ListaSecun() {
+    public ListaString() {
         this.first = null;
         this.last = null;
         this.size = 0;
@@ -24,7 +24,7 @@ public class ListaSecun {
         return first == null;
     }
 
-    public void insertarFinal(NodoListaSecun NodoNuevo) {
+    public void insertarFinal(NodoListaString NodoNuevo) {
         if (first == null) {
             first = NodoNuevo;
             last = NodoNuevo;
@@ -38,28 +38,28 @@ public class ListaSecun {
     /**
      * @return the first
      */
-    public NodoListaSecun getFirst() {
+    public NodoListaString getFirst() {
         return first;
     }
 
     /**
      * @param first the first to set
      */
-    public void setFirst(NodoListaSecun first) {
+    public void setFirst(NodoListaString first) {
         this.first = first;
     }
 
     /**
      * @return the last
      */
-    public NodoListaSecun getLast() {
+    public NodoListaString getLast() {
         return last;
     }
 
     /**
      * @param last the last to set
      */
-    public void setLast(NodoListaSecun last) {
+    public void setLast(NodoListaString last) {
         this.last = last;
     }
 

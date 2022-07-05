@@ -19,26 +19,27 @@ public class HashTablePrinc {
     }
 
     public int Tamaño() {
-        return tamaño;
+        return getTamaño();
     }
 
     public boolean EsVacio() {
-        return tamaño == 0;
+        return getTamaño() == 0;
     }
 
     public void Inicio() {
-        for (int i = 0; i < this.capacidad; i++) {
-            arreglo[i] = new ListaPrinc();
+        for (int i = 0; i < this.getCapacidad(); i++) {
+            getArreglo()[i] = new ListaPrinc();
         }
     }
 
-    public void Agregar(NodoListaPrinc Nodo) {
+    public boolean Agregar(NodoListaPrinc Nodo) {
         int arregloIndice = getArregloIndice(Nodo);
-        ListaPrinc cabeza = arreglo[arregloIndice];
+        ListaPrinc cabeza = getArreglo()[arregloIndice];
         if (cabeza.esVacio()) {
             cabeza.insertarFinal(Nodo);
-            tamaño++;
+            setTamaño(getTamaño() + 1);
             System.out.println("PRIMER ELEMENTO GUARDADO");
+            return true;
         } else {
             boolean existe = false;
             NodoListaPrinc primero = cabeza.getFirst();
@@ -52,8 +53,10 @@ public class HashTablePrinc {
             if (!(existe)) {
                 cabeza.insertarFinal(Nodo);
                 System.out.println("HUBO COLISION, GUARDADO");
+                return true;
             }
         }
+        return false;
     }
 
     public int getArregloIndice(NodoListaPrinc Nodo) {
@@ -63,14 +66,14 @@ public class HashTablePrinc {
             char caracter = title.charAt(i);
             ascii = ascii + (int) caracter;
         }
-        int key = ascii % capacidad;
+        int key = ascii % getCapacidad();
         return key;
     }
 
     public NodoListaPrinc Encontrar(NodoListaPrinc Nodo) {
         int arregloIndice = getArregloIndice(Nodo);
         System.out.println(arregloIndice);
-        ListaPrinc cabeza = arreglo[arregloIndice];
+        ListaPrinc cabeza = getArreglo()[arregloIndice];
         if (!(cabeza.esVacio())) {
             NodoListaPrinc primero = cabeza.getFirst();
             while (primero != null) {
@@ -88,4 +91,47 @@ public class HashTablePrinc {
         JOptionPane.showMessageDialog(null, "El artículo: '" + Nodo.getTitle() + "', no se encuentra en la base de datos.");
         return null;
     }
+
+    /**
+     * @return the arreglo
+     */
+    public ListaPrinc[] getArreglo() {
+        return arreglo;
+    }
+
+    /**
+     * @param arreglo the arreglo to set
+     */
+    public void setArreglo(ListaPrinc[] arreglo) {
+        this.arreglo = arreglo;
+    }
+
+    /**
+     * @return the capacidad
+     */
+    public int getCapacidad() {
+        return capacidad;
+    }
+
+    /**
+     * @param capacidad the capacidad to set
+     */
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
+    }
+
+    /**
+     * @return the tamaño
+     */
+    public int getTamaño() {
+        return tamaño;
+    }
+
+    /**
+     * @param tamaño the tamaño to set
+     */
+    public void setTamaño(int tamaño) {
+        this.tamaño = tamaño;
+    }
+    
 }

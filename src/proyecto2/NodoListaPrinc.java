@@ -15,13 +15,15 @@ public class NodoListaPrinc {
     private String text;
     private String[] authors;
     private String[] key_words;
+    private int[] reps;
 
-    public NodoListaPrinc(String title, String text, String[] authors, String[] key_words) {
+    public NodoListaPrinc(String title, String text, String[] authors, String[] key_words, int[] reps) {
         this.next = null;
         this.title = title;
         this.text = text;
         this.authors = authors;
         this.key_words = key_words;
+        this.reps = reps;
     }
 
     /**
@@ -92,6 +94,20 @@ public class NodoListaPrinc {
      */
     public void setKeys(String[] key_words) {
         this.key_words = key_words;
+    }
+
+    /**
+     * @return the reps
+     */
+    public int[] getReps() {
+        return reps;
+    }
+
+    /**
+     * @param reps the reps to set
+     */
+    public void setReps(int[] reps) {
+        this.reps = reps;
     }
 
 }

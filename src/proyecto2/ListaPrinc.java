@@ -30,7 +30,7 @@ public class ListaPrinc {
         }  
         else {  
             last.setNext(NodoNuevo);
-            last = NodoNuevo;  
+            last = NodoNuevo; 
         }  
         size++;
     }  
