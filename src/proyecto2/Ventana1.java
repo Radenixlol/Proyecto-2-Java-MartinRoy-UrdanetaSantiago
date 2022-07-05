@@ -181,9 +181,9 @@ public class Ventana1 extends javax.swing.JFrame {
 
         jLabel9.setText("Búsqueda de todos los artículos cargados en el sistema");
 
-        jLabel10.setText("Nota: se debe \"Actualizar\" antes de poder buscar la info");
+        jLabel10.setText("Nota: se debe hacer clic en \"Actualizar\" para poder buscar la información");
 
-        jLabel13.setText("Eliga una opción:");
+        jLabel13.setText("Elija una opción:");
 
         javax.swing.GroupLayout SearchLayout = new javax.swing.GroupLayout(Search);
         Search.setLayout(SearchLayout);
@@ -194,13 +194,16 @@ public class Ventana1 extends javax.swing.JFrame {
                     .addGroup(SearchLayout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addGroup(SearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
                             .addGroup(SearchLayout.createSequentialGroup()
                                 .addComponent(Combo_up1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Combo_search1))))
+                                .addComponent(Combo_search1))
+                            .addGroup(SearchLayout.createSequentialGroup()
+                                .addGroup(SearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(SearchLayout.createSequentialGroup()
                         .addContainerGap(47, Short.MAX_VALUE)
                         .addComponent(ListaGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -209,7 +212,7 @@ public class Ventana1 extends javax.swing.JFrame {
         SearchLayout.setVerticalGroup(
             SearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SearchLayout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(49, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGap(26, 26, 26)
                 .addComponent(jLabel13)
@@ -271,7 +274,7 @@ public class Ventana1 extends javax.swing.JFrame {
 
         Combo_search3.setText("Buscar");
 
-        jLabel11.setText("Nota: se debe \"Actualizar\" y escribir el autor o palabra antes de poder buscar la info");
+        jLabel11.setText("Nota: se debe escribir el autor o palabra clave y hacer clic en \"Actualizar\" para poder buscar la información");
 
         jLabel12.setText("Búsqueda de todos los artículos cargados en el sistema por autor o palabra clave");
 
@@ -305,10 +308,9 @@ public class Ventana1 extends javax.swing.JFrame {
                             .addComponent(ListaClave, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16))
                     .addGroup(FilterLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(FilterLayout.createSequentialGroup()
-                        .addComponent(jLabel12)
+                        .addGroup(FilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         FilterLayout.setVerticalGroup(
@@ -450,6 +452,8 @@ public class Ventana1 extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Ventana1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

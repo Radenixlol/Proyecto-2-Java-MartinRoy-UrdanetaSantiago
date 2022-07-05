@@ -17,6 +17,15 @@ public class NodoListaPrinc {
     private String[] key_words;
     private int[] reps;
 
+    /**
+     * @author: Santiago Urdaneta
+     * @param title título del artículo científico
+     * @param text resumen del artículo científico
+     * @param authors array de los autores del artículo científico
+     * @param key_words array de las palabras claves del artículo científico
+     * @param reps array de las veces que las palabras claves aparecen en el resumen del artículo científico
+     * @deprecated: constructor de la Tabla de Dispersión
+     */
     public NodoListaPrinc(String title, String text, String[] authors, String[] key_words, int[] reps) {
         this.next = null;
         this.title = title;
@@ -32,7 +41,7 @@ public class NodoListaPrinc {
     public NodoListaPrinc getNext() {
         return next;
     }
-    
+
     /**
      * @param next the next to set
      */

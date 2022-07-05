@@ -13,27 +13,40 @@ public class ListaPrinc {
     private NodoListaPrinc first, last;
     private int size;
 
+    /**
+     * @author: Santiago Urdaneta
+     * @deprecated: constructor de la lista
+     */
     public ListaPrinc() {
         this.first = null;
         this.last = null;
         this.size = 0;
     }
 
+    /**
+     * @author: Santiago Urdaneta
+     * @deprecated: conocer si la lista está vacía
+     * @return: booleano
+     */
     public boolean esVacio() {
         return first == null;
     }
 
-    public void insertarFinal(NodoListaPrinc NodoNuevo) {  
-        if(esVacio()) {  
-            first = NodoNuevo;  
-            last = NodoNuevo;  
-        }  
-        else {  
+    /**
+     * @author Santiago Urdaneta
+     * @param NodoNuevo nodo que se insertará en la lista
+     * @deprecated: se inserta el nodo al final de la lista
+     */
+    public void insertarFinal(NodoListaPrinc NodoNuevo) {
+        if (esVacio()) {
+            first = NodoNuevo;
+            last = NodoNuevo;
+        } else {
             last.setNext(NodoNuevo);
-            last = NodoNuevo; 
-        }  
+            last = NodoNuevo;
+        }
         size++;
-    }  
+    }
 
     /**
      * @return the first

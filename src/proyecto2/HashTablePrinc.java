@@ -34,9 +34,8 @@ public class HashTablePrinc {
     /**
      * @author Santiago Urdaneta
      * @param Nodo el cual se agregará a la TablaHash
-     * @deprecated: Evalua si la key donde se insertará el nodo está vacía o no, si esta se
-     * encuentra vacía, se crea una lista vacía y le inserta el nodo; en caso contrario, le 
-     * añade el nodo a insertar a la lista ya existente en esa posición (key) del la TablaHash
+     * @deprecated: se agrega el nodo a la TablaHash en el key correspondiente
+     * mediante el uso de una lista simple enlazada
      */
     public boolean Agregar(NodoListaPrinc Nodo) {
         int arregloIndice = getArregloIndice(Nodo);
@@ -50,13 +49,13 @@ public class HashTablePrinc {
         } else {
             boolean existe = false;
             ListaPrinc Lista = arreglo[arregloIndice];
-            NodoListaPrinc primero = Lista.getFirst();
-            while ((primero != null) && !(existe)) {
-                if ((primero.getText()).equals(Nodo.getText())) {
+            NodoListaPrinc auxiliar = Lista.getFirst();
+            while ((auxiliar != null) && !(existe)) {
+                if ((auxiliar.getText()).equals(Nodo.getText())) {
                     JOptionPane.showMessageDialog(null, "El artículo: '" + Nodo.getTitle() + "' ya se encuentra en la base de datos.");
                     existe = true;
                 }
-                primero = primero.getNext();
+                auxiliar = auxiliar.getNext();
             }
             if (!(existe)) {
                 Lista.insertarFinal(Nodo);
@@ -67,6 +66,14 @@ public class HashTablePrinc {
         return false;
     }
 
+    /**
+     * @author Santiago Urdaneta
+     * @param Nodo al cual se quiere conocer su posición (key) en la TablaHash
+     * @deprecated: evalua el título del artículo científico y realiza la
+     * función Hash (función modular) con el valor de la sumatoria ASCII del
+     * título
+     * @return: valor de posición del nodo (key) en la TablaHash
+     */
     public int getArregloIndice(NodoListaPrinc Nodo) {
         String title = Nodo.getTitle();
         int ascii = 0;
@@ -78,20 +85,27 @@ public class HashTablePrinc {
         return key;
     }
 
+    /**
+     * @author Santiago Urdaneta
+     * @param Nodo el cual se quiere encontrar
+     * @deprecated: encuentra el nodo accediendo a la key correspondiente y
+     * buscandolo en la lista simple enlazada
+     * @return: nodo a encontrar
+     */
     public NodoListaPrinc Encontrar(NodoListaPrinc Nodo) {
         int arregloIndice = getArregloIndice(Nodo);
         System.out.println(arregloIndice);
         ListaPrinc Lista = arreglo[arregloIndice];
         if (!(Lista.esVacio())) {
-            NodoListaPrinc primero = Lista.getFirst();
-            while (primero != null) {
-                if (primero.getTitle().equals(Nodo.getTitle())) {
+            NodoListaPrinc auxiliar = Lista.getFirst();
+            while (auxiliar != null) {
+                if (auxiliar.getText().equals(Nodo.getText())) {
                     System.out.println("ENCONTRADO");
-                    System.out.println(primero.getTitle() + primero.getText());
+                    System.out.println(auxiliar.getTitle() + auxiliar.getText());
                     System.out.println();
-                    return primero;
+                    return auxiliar;
                 }
-                primero = primero.getNext();
+                auxiliar = auxiliar.getNext();
             }
         }
         JOptionPane.showMessageDialog(null, "El artículo: '" + Nodo.getTitle() + "', no se encuentra en la base de datos.");

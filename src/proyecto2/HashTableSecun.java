@@ -1,7 +1,5 @@
 package proyecto2;
 
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author Santiago Urdaneta
@@ -12,20 +10,32 @@ public class HashTableSecun {
     private int capacidad;
     private int tamaño;
 
+    /**
+     * @author: Santiago Urdaneta
+     * @deprecated: constructor de la Tabla de Dispersión
+     */
     public HashTableSecun() {
         this.capacidad = 401;
         arreglo = new ListaSecun[capacidad];
         this.tamaño = 0;
     }
 
-    public int Tamaño() {
-        return tamaño;
-    }
-
+    /**
+     * @author: Santiago Urdaneta
+     * @deprecated: conocer si la TablaHash está vacía
+     * @return: booleano
+     */
     public boolean EsVacio() {
         return tamaño == 0;
     }
 
+    /**
+     * @author Santiago Urdaneta
+     * @param object elemento con el que se rellenará la HashTable
+     * @param title título del artículo científico que se agregará
+     * @deprecated: se agrega el nodo a la TablaHash en el key correspondiente
+     * mediante el uso de una lista simple enlazada
+     */
     public void Agregar(String object, String title) {
         int arregloIndice = getArregloIndice(object);
         if (arreglo[arregloIndice] == null) {
@@ -40,16 +50,16 @@ public class HashTableSecun {
         } else {
             boolean existe1 = false;
             ListaSecun Lista = arreglo[arregloIndice];
-            NodoListaSecun primero = Lista.getFirst();
-            while ((primero != null) && !(existe1)) {
-                if ((primero.getObject()).equals(object)) {
+            NodoListaSecun auxiliar = Lista.getFirst();
+            while ((auxiliar != null) && !(existe1)) {
+                if ((auxiliar.getObject()).equals(object)) {
                     System.out.println("El dato ya fue añadido anteriormente");
                     boolean existe2 = false;
-                    ListaString titulo0 = primero.elementos;
+                    ListaString titulo0 = auxiliar.elementos;
                     NodoListaString titulo = titulo0.getFirst();
                     while ((titulo != null) && !(existe2)) {
                         if ((titulo.getElemento()).equals(title)) {
-                            JOptionPane.showMessageDialog(null, "El dato: '" + object + "' y el título: '" + title + "' ya se encuentran vinculados.");
+                            System.out.println("El dato: '" + object + "' y el título: '" + title + "' ya se encuentran vinculados.");
                             existe2 = true;
                         }
                         titulo = titulo.getNext();
@@ -57,11 +67,11 @@ public class HashTableSecun {
                     if (!(existe2)) {
                         NodoListaString elemento = new NodoListaString(title);
                         titulo0.insertarFinal(elemento);
-                        JOptionPane.showMessageDialog(null, "El título: '" + title + "' fue vinculado al dato: '" + object + "'");
+                        System.out.println("El título: '" + title + "' fue vinculado al dato: '" + object + "'");
                     }
                     existe1 = true;
                 }
-                primero = primero.getNext();
+                auxiliar = auxiliar.getNext();
             }
             if (!(existe1)) {
                 NodoListaSecun Nodo1 = new NodoListaSecun(object);
@@ -73,6 +83,14 @@ public class HashTableSecun {
         }
     }
 
+    /**
+     * @author Santiago Urdaneta
+     * @param title al cual se quiere conocer su posición (key) en la TablaHash
+     * @deprecated: evalua el título del artículo científico y realiza la
+     * función Hash (función modular) con el valor de la sumatoria ASCII del
+     * título
+     * @return: valor de posición del nodo (key) en la TablaHash
+     */
     public int getArregloIndice(String title) {
         int ascii = 0;
         for (int i = 0; i < title.length(); i++) {
@@ -83,14 +101,21 @@ public class HashTableSecun {
         return key;
     }
 
+    /**
+     * @author Santiago Urdaneta
+     * @param object elemento el cual se quiere encontrar
+     * @deprecated: encuentra el nodo accediendo a la key correspondiente y
+     * buscandolo en la lista simple enlazada
+     * @return: nodo a encontrar
+     */
     public String Encontrar(String object) {
         int arregloIndice = getArregloIndice(object);
         ListaSecun Lista = arreglo[arregloIndice];
         if (!(Lista.esVacio())) {
-            NodoListaSecun primero = Lista.getFirst();
-            while (primero != null) {
-                if (primero.getObject().equals(object)) {
-                    NodoListaString datos = primero.elementos.getFirst();
+            NodoListaSecun auxiliar = Lista.getFirst();
+            while (auxiliar != null) {
+                if (auxiliar.getObject().equals(object)) {
+                    NodoListaString datos = auxiliar.elementos.getFirst();
                     String cadena = "";
                     while (datos != null) {
                         cadena += datos.getElemento();
@@ -99,10 +124,53 @@ public class HashTableSecun {
                     }
                     return cadena;
                 }
-                primero = primero.getNext();
+                auxiliar = auxiliar.getNext();
             }
         }
-        JOptionPane.showMessageDialog(null, "El dato: '" + object + "', no se encuentra en la base de datos.");
+        System.out.println("El dato: '" + object + "', no se encuentra en la base de datos.");
         return null;
     }
+
+    /**
+     * @return the arreglo
+     */
+    public ListaSecun[] getArreglo() {
+        return arreglo;
+    }
+
+    /**
+     * @param arreglo the arreglo to set
+     */
+    public void setArreglo(ListaSecun[] arreglo) {
+        this.arreglo = arreglo;
+    }
+
+    /**
+     * @return the capacidad
+     */
+    public int getCapacidad() {
+        return capacidad;
+    }
+
+    /**
+     * @param capacidad the capacidad to set
+     */
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
+    }
+
+    /**
+     * @return the tamaño
+     */
+    public int getTamaño() {
+        return tamaño;
+    }
+
+    /**
+     * @param tamaño the tamaño to set
+     */
+    public void setTamaño(int tamaño) {
+        this.tamaño = tamaño;
+    }
+
 }

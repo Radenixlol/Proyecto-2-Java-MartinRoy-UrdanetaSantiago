@@ -49,11 +49,8 @@ public class Proyecto2 {
 //        table.Encontrar(p3);
 //        table.Encontrar(p4);
         
-                
-        
         Ventana1 v = new Ventana1();
         v.setVisible(true);
-        
         
 //        Backup archivo = new Backup();
 //        archivo.lectura_nueva();        

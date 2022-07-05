@@ -14,16 +14,30 @@ public class ListaString {
     private NodoListaString first, last;
     private int size;
 
+    /**
+     * @author: Santiago Urdaneta
+     * @deprecated: constructor de la lista
+     */
     public ListaString() {
         this.first = null;
         this.last = null;
         this.size = 0;
     }
 
+    /**
+     * @author: Santiago Urdaneta
+     * @deprecated: conocer si la lista está vacía
+     * @return: booleano
+     */
     public boolean esVacio() {
         return first == null;
     }
 
+    /**
+     * @author Santiago Urdaneta
+     * @param NodoNuevo nodo que se insertará en la lista
+     * @deprecated: se inserta el nodo al final de la lista
+     */
     public void insertarFinal(NodoListaString NodoNuevo) {
         if (esVacio()) {
             first = NodoNuevo;
@@ -33,6 +47,43 @@ public class ListaString {
             last = NodoNuevo;
         }
         size++;
+    }
+
+    /**
+     * @author Santiago Urdaneta
+     * @deprecated: convierte la lista en un arreglo con el tamaño de la lista
+     * @return: lista convertida en arreglo 
+     */
+    public String[] convertirListaArray() {
+        String arreglo[] = new String[size];
+        int auxiliar = size;
+        NodoListaString temp = first;
+        for (int i = 0; auxiliar != 0; i++) {
+            arreglo[i] = temp.getElemento();
+            temp = temp.getNext();
+            auxiliar--;
+        }
+        return arreglo;
+    }
+
+    /**
+     * @author Santiago Urdaneta
+     * @deprecated: ordena alfabéticamente los elementos del array
+     * @return: arreglo ordenado alfabéticamente
+     */
+    public String[] ordenarAlfabeticamente() {
+        String temp;
+        String[] arreglo = convertirListaArray();
+        for (int i = 0; i < size; i++) {
+            for (int j = i + 1; j < size; j++) {
+                if (arreglo[i].compareTo(arreglo[j]) > 0) {
+                    temp = arreglo[i];
+                    arreglo[i] = arreglo[j];
+                    arreglo[j] = temp;
+                }
+            }
+        }
+        return arreglo;
     }
 
     /**
@@ -69,4 +120,5 @@ public class ListaString {
     public int getSize() {
         return size;
     }
+
 }
