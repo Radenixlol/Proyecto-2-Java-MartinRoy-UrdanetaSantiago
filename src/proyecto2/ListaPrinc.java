@@ -26,7 +26,7 @@ public class ListaPrinc {
     /**
      * @author: Santiago Urdaneta
      * @deprecated: conocer si la lista está vacía
-     * @return: booleano
+     * @return booleano
      */
     public boolean esVacio() {
         return first == null;

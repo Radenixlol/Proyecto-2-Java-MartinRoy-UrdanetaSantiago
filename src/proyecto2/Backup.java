@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 
 /**
  * @author: Roy Martin
- * @version 1.0
+ * 
  */
 public class Backup {
 
@@ -25,7 +25,7 @@ public class Backup {
      * @author Roy Martin
      * @return
      * @deprecated: Selecciona el archivo txt para leerlo y usar sus datos
-     * posteriormente
+     * en una de las funciones de backup
      */
     public String Seleccionador_lectura() {
         String texto = "";
@@ -56,10 +56,12 @@ public class Backup {
      * @param tabla
      * @param autores
      * @param palabras
-     * @deprecated: Hace una clasificación de los datos obtenidos en la lectura
-     * y los asigna a los lugares respectivos del nodo
+     * @param titulos
+     * @return booleano
+     * @deprecated: Hace una clasificación de los datos obtenidos en la lectura,
+     * los asigna a los lugares respectivos del nodo y los añade a las hashtables existentes
      */
-    public void lectura_nueva(HashTablePrinc tabla, HashTableSecun autores, HashTableSecun palabras) {
+    public boolean lectura_nueva(HashTablePrinc tabla, HashTableSecun autores, HashTableSecun palabras, ListaString titulos) {
         String texto = this.Seleccionador_lectura();
         if (!"".equals(texto)) {
             String[] datos = texto.split("\n");
@@ -73,13 +75,13 @@ public class Backup {
             String[] key_words = {};
             for (int i = 0; i < datos.length; i++) {
                 if (tt) {
-                    if ((!"".equals(datos[i])) && (!" ".equals(datos[i]))) {
+                    if ((!"".equals(datos[i])) && (!" ".equals(datos[i])) && (!"\n".equals(datos[i]))) {
                         title = datos[i];
                         tt = false;
                         at = true;
                     }
                 } else if (at) {
-                    if (("Autores".equals(datos[i])) || ("Autor".equals(datos[i])) || ("Autora".equals(datos[i]))) {
+                    if (("Autores".equals(datos[i])) || ("Autor".equals(datos[i])) || ("Autora".equals(datos[i])) || ("Autoras".equals(datos[i]))) {
                         i += 1;
                         String authorstemp = "";
                         while ((!"".equals(datos[i])) && (!" ".equals(datos[i]))) {
@@ -99,7 +101,7 @@ public class Backup {
                         cl = true;
                     }
                 } else if (cl) {
-                    if ((!"".equals(datos[i])) && (!" ".equals(datos[i]))) {
+                    if ((!"".equals(datos[i])) && (!" ".equals(datos[i])) && (!"\n".equals(datos[i]))) {
                         String temp3 = "";
                         String temp = datos[i];
                         String[] temp2 = temp.replace(":", ",").split(", ");
@@ -132,8 +134,18 @@ public class Backup {
                 for (int i = 0; i < key_words.length; i++) {
                     palabras.Agregar(key_words[i], title);
                 }
+                NodoListaString Cadena = new NodoListaString(title);
+                titulos.insertarFinal(Cadena);
+                JOptionPane.showMessageDialog(null, "Carga Completada");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo cargar el artículo");
+                return false;
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "El archivo está vacío");
         }
+        return false;
     }
 
     /**
@@ -141,10 +153,12 @@ public class Backup {
      * @param tabla
      * @param autores
      * @param palabras
-     * @deprecated: Hace una clasificación de los datos obtenidos en la lectura
-     * y los asigna a los lugares respectivos del grafo
+     * @param titulos
+     * @return booleano
+     * @deprecated: Hace una lectura de la base de datos y vuelve a cargar
+     * los datos que fueron guardados en un uso anterior
      */
-    public void lectura_data(HashTablePrinc tabla, HashTableSecun autores, HashTableSecun palabras) {
+    public boolean lectura_data(HashTablePrinc tabla, HashTableSecun autores, HashTableSecun palabras, ListaString titulos) {
         String data = this.Seleccionador_lectura();
         if (!"".equals(data)) {
             String pt = "%°%";
@@ -168,7 +182,6 @@ public class Backup {
                     }
                     reps[j] = cantidad;
                 }
-
                 NodoListaPrinc article = new NodoListaPrinc(title, text, authors, key_words, reps);
                 boolean avaible = tabla.Agregar(article);
                 if (avaible) {
@@ -178,25 +191,28 @@ public class Backup {
                     for (int j = 0; j < key_words.length; j++) {
                         palabras.Agregar(key_words[j], title);
                     }
-                }
-                System.out.println(title);
-                for (int j = 0; j < authors.length; j++) {
-                    System.out.println(authors[j]);
-                }
-                System.out.println(text);
-                for (int j = 0; j < key_words.length; j++) {
-                    System.out.println(key_words[j]);
+                    NodoListaString Cadena = new NodoListaString(title);
+                    titulos.insertarFinal(Cadena);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo cargar el artículo");
+                    System.out.println();
+                    System.out.println(title);
+                    return false;
                 }
             }
-            System.out.println("Carga completada");
+            JOptionPane.showMessageDialog(null, "Carga Completada");
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "El archivo está vacío");
         }
+        return false;
     }
 
     /**
      * @param tabla
      * @author: Roy Martin
      * @deprecated: Es el procedimiento de escritura de archivos, extrae todos
-     * los datos de un grafo para guardarlo en un txt para ser usado
+     * los datos de la hashtable principal para guardarlo en un txt para ser usado
      * posteriormente
      *
      */
@@ -244,5 +260,4 @@ public class Backup {
             }
         }
     }
-
 }

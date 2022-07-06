@@ -2,7 +2,7 @@ package proyecto2;
 
 /**
  *
- * @author Santiago Urdaneta
+ * @author Roy Martin
  */
 public class NodoListaString {
 
@@ -10,8 +10,8 @@ public class NodoListaString {
     private String elemento;
 
     /**
-     * @author: Santiago Urdaneta
-     * @param elemento elemento con el que se rellenará el nodo
+     * @author: Roy Martin
+     * @param elemento dato con el que se rellenará el nodo
      * @deprecated: constructor de la Tabla de Dispersión
      */
     public NodoListaString(String elemento) {
