@@ -1,8 +1,8 @@
 Complemento de software para el diseño de fundaciones.
 
 Autores
-Raquel Sandoval 
-Iván Loscher 
+Raquel Sandoval
+Iván Loscher
 Christian Guillén Drija
  
 Resumen

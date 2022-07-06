@@ -16,7 +16,7 @@ import javax.swing.border.TitledBorder;
 
 /**
  *
- * @author Radenixlol
+ * @author Roy Martin
  */
 public class Ventana2 {
      /**

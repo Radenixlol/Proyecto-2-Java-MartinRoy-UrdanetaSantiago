@@ -6,7 +6,7 @@ package proyecto2;
 
 /**
  *
- * @author Radenixlol
+ * @author Roy Martin
  */
 public class Proyecto2 {
 
