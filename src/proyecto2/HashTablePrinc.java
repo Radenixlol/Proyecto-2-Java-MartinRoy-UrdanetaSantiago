@@ -25,7 +25,7 @@ public class HashTablePrinc {
     /**
      * @author: Santiago Urdaneta
      * @deprecated: conocer si la TablaHash está vacía
-     * @return: booleano
+     * @return booleano
      */
     public boolean EsVacio() {
         return tamaño == 0;
@@ -34,11 +34,12 @@ public class HashTablePrinc {
     /**
      * @author Santiago Urdaneta
      * @param Nodo el cual se agregará a la TablaHash
+     * @return booleano
      * @deprecated: se agrega el nodo a la TablaHash en el key correspondiente
      * mediante el uso de una lista simple enlazada
      */
     public boolean Agregar(NodoListaPrinc Nodo) {
-        int arregloIndice = getArregloIndice(Nodo);
+        int arregloIndice = getArregloIndice(Nodo.getTitle());
         if (arreglo[arregloIndice] == null) {
             arreglo[arregloIndice] = new ListaPrinc();
             ListaPrinc Lista = arreglo[arregloIndice];
@@ -68,14 +69,13 @@ public class HashTablePrinc {
 
     /**
      * @author Santiago Urdaneta
-     * @param Nodo al cual se quiere conocer su posición (key) en la TablaHash
+     * @param title al cual se quiere conocer su posición (key) en la TablaHash
      * @deprecated: evalua el título del artículo científico y realiza la
      * función Hash (función modular) con el valor de la sumatoria ASCII del
      * título
-     * @return: valor de posición del nodo (key) en la TablaHash
+     * @return valor de posición del nodo (key) en la TablaHash
      */
-    public int getArregloIndice(NodoListaPrinc Nodo) {
-        String title = Nodo.getTitle();
+    public int getArregloIndice(String title) {
         int ascii = 0;
         for (int i = 0; i < title.length(); i++) {
             char caracter = title.charAt(i);
@@ -90,10 +90,10 @@ public class HashTablePrinc {
      * @param Nodo el cual se quiere encontrar
      * @deprecated: encuentra el nodo accediendo a la key correspondiente y
      * buscandolo en la lista simple enlazada
-     * @return: nodo a encontrar
+     * @return nodo a encontrar
      */
     public NodoListaPrinc Encontrar(NodoListaPrinc Nodo) {
-        int arregloIndice = getArregloIndice(Nodo);
+        int arregloIndice = getArregloIndice(Nodo.getTitle());
         System.out.println(arregloIndice);
         ListaPrinc Lista = arreglo[arregloIndice];
         if (!(Lista.esVacio())) {

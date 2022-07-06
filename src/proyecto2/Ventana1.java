@@ -14,6 +14,8 @@ public class Ventana1 extends javax.swing.JFrame {
     HashTablePrinc tabla = new HashTablePrinc();
     HashTableSecun autores = new HashTableSecun();
     HashTableSecun palabras = new HashTableSecun();
+    ListaString titulos = new ListaString();
+    Ventana2 v2 = new Ventana2();
 
     /**
      * Creates new form Ventana3
@@ -24,6 +26,78 @@ public class Ventana1 extends javax.swing.JFrame {
         ListaClave.setEnabled(false);
         ListaGeneral.setEnabled(false);
         save.setEnabled(false);
+        Combo_search1.setEnabled(false);
+        Combo_search2.setEnabled(false);
+        Combo_search3.setEnabled(false);
+        Combo_up1.setEnabled(false);
+        Combo_up2.setEnabled(false);
+        Combo_up3.setEnabled(false);
+    }
+
+    /**
+     * @author Santiago Urdaneta & Roy Martin
+     * @param desorden
+     * @deprecated: ordena alfabéticamente los elementos del array
+     * @return arreglo ordenado alfabéticamente
+     */
+    public String[] ordenarAlfabeticamente(String[] desorden) {
+        String temp;
+        String[] arreglo = desorden;
+        for (int i = 0; i < arreglo.length; i++) {
+            for (int j = i + 1; j < arreglo.length; j++) {
+                if (arreglo[i].compareTo(arreglo[j]) > 0) {
+                    temp = arreglo[i];
+                    arreglo[i] = arreglo[j];
+                    arreglo[j] = temp;
+                }
+            }
+        }
+        return arreglo;
+    }
+
+    public void FormatearTexto(String seleccionado) {
+        int index = tabla.getArregloIndice(seleccionado);
+        ListaPrinc[] arreglo = tabla.getArreglo();
+        NodoListaPrinc auxiliar = arreglo[index].getFirst();
+        NodoListaPrinc nodo = null;
+        boolean existe = false;
+        while ((auxiliar != null) && !(existe)) {
+            if ((auxiliar.getTitle()).equals(seleccionado)) {
+                nodo = auxiliar;
+                existe = true;
+            }
+            auxiliar = auxiliar.getNext();
+        }
+        String textformat = "";
+        if (existe) {
+            textformat += '"';
+            textformat += nodo.getTitle();
+            textformat += '"';
+            textformat += "\n\n";
+            textformat += "Autores:";
+            textformat += "\n";
+            String[] autores = nodo.getAuthors();
+            for (int i = 0; i < autores.length; i++) {
+                textformat += autores[i];
+                textformat += "\n";
+            }
+            textformat += "\n\n";
+            textformat += "Resumen";
+            textformat += "\n";
+            textformat += nodo.getText();
+            textformat += "\n\n";
+            textformat += "Palabras clave: repeticiones en el texto";
+            textformat += "\n";
+            String[] key_words = nodo.getKey_words();
+            int[] reps = nodo.getReps();
+            for (int i = 0; i < key_words.length; i++) {
+                textformat += key_words[i];
+                textformat += ": ";
+                textformat += reps[i];
+                textformat += "\n";
+            }
+        }
+        v2.initcomponents2(textformat);
     }
 
     /**
@@ -116,26 +190,30 @@ public class Ventana1 extends javax.swing.JFrame {
             .addGroup(UpdateLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addContainerGap(81, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdateLayout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(Data)
+                    .addGroup(UpdateLayout.createSequentialGroup()
+                        .addGroup(UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel6))
+                        .addContainerGap(101, Short.MAX_VALUE))
+                    .addGroup(UpdateLayout.createSequentialGroup()
+                        .addGroup(UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(31, 31, 31))))
+            .addGroup(UpdateLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(UpdateLayout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(Data)))
                 .addGap(83, 83, 83)
                 .addComponent(save)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(TextNew)
                 .addGap(50, 50, 50))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdateLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel14)
-                .addGap(32, 32, 32)
-                .addComponent(jLabel2)
-                .addGap(36, 36, 36))
         );
         UpdateLayout.setVerticalGroup(
             UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,6 +256,11 @@ public class Ventana1 extends javax.swing.JFrame {
         });
 
         Combo_search1.setText("Buscar");
+        Combo_search1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo_search1ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Búsqueda de todos los artículos cargados en el sistema");
 
@@ -202,17 +285,17 @@ public class Ventana1 extends javax.swing.JFrame {
                                 .addGroup(SearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13)
                                     .addComponent(jLabel9)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(SearchLayout.createSequentialGroup()
-                        .addContainerGap(47, Short.MAX_VALUE)
+                        .addContainerGap(57, Short.MAX_VALUE)
                         .addComponent(ListaGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         SearchLayout.setVerticalGroup(
             SearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SearchLayout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGap(26, 26, 26)
                 .addComponent(jLabel13)
@@ -264,6 +347,11 @@ public class Ventana1 extends javax.swing.JFrame {
         });
 
         Combo_search2.setText("Buscar");
+        Combo_search2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo_search2ActionPerformed(evt);
+            }
+        });
 
         Combo_up3.setText("Actualizar");
         Combo_up3.addActionListener(new java.awt.event.ActionListener() {
@@ -273,6 +361,11 @@ public class Ventana1 extends javax.swing.JFrame {
         });
 
         Combo_search3.setText("Buscar");
+        Combo_search3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo_search3ActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("Nota: se debe escribir el autor o palabra clave y hacer clic en \"Actualizar\" para poder buscar la información");
 
@@ -297,7 +390,7 @@ public class Ventana1 extends javax.swing.JFrame {
                                     .addGap(123, 123, 123)))
                             .addComponent(name_author, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ListaAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                         .addGroup(FilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(name_key, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
@@ -308,10 +401,9 @@ public class Ventana1 extends javax.swing.JFrame {
                             .addComponent(ListaClave, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16))
                     .addGroup(FilterLayout.createSequentialGroup()
-                        .addGroup(FilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jLabel12)
+                        .addGap(0, 161, Short.MAX_VALUE))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         FilterLayout.setVerticalGroup(
             FilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,48 +466,76 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         String object = name_author.getText();
         String cadena = autores.Encontrar(object);
-//        System.out.println(cadena);
-        String[] boxauthor = cadena.split(",");
+        String[] boxauthor1 = cadena.split(",");
+        String[] boxauthor = ordenarAlfabeticamente(boxauthor1);
         ListaAutor.removeAllItems();
         for (int i = 0; i < boxauthor.length; i++) {
             ListaAutor.insertItemAt(boxauthor[i], i);
         }
         ListaAutor.setEnabled(true);
+        Combo_search2.setEnabled(true);
+
     }//GEN-LAST:event_Combo_up2ActionPerformed
 
     private void Combo_up3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo_up3ActionPerformed
         // TODO add your handling code here:
         String object = name_key.getText();
         String cadena = palabras.Encontrar(object);
-//        System.out.println(cadena);
-        String[] boxpalabras = cadena.split(",");
+        String[] boxpalabras1 = cadena.split(",");
+        String[] boxpalabras = ordenarAlfabeticamente(boxpalabras1);
         ListaClave.removeAllItems();
         for (int i = 0; i < boxpalabras.length; i++) {
             ListaClave.insertItemAt(boxpalabras[i], i);
         }
         ListaClave.setEnabled(true);
+        Combo_search3.setEnabled(true);
     }//GEN-LAST:event_Combo_up3ActionPerformed
 
     private void Combo_up1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo_up1ActionPerformed
         // TODO add your handling code here:
+        String[] boxgeneral1 = titulos.convertirListaArray();
+        String[] boxgeneral = ordenarAlfabeticamente(boxgeneral1);
+        ListaGeneral.removeAllItems();
+        for (int i = 0; i < boxgeneral.length; i++) {
+            ListaGeneral.insertItemAt(boxgeneral[i], i);
+        }
         ListaGeneral.setEnabled(true);
+        Combo_search1.setEnabled(true);
     }//GEN-LAST:event_Combo_up1ActionPerformed
 
     private void DataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataActionPerformed
         // TODO add your handling code here:
-        B.lectura_data(tabla, autores, palabras);
-        ListaAutor.setEnabled(false);
-        ListaClave.setEnabled(false);
-        ListaGeneral.setEnabled(false);
+        boolean Done = B.lectura_data(tabla, autores, palabras, titulos);
+        if (Done) {
+            ListaAutor.setEnabled(false);
+            ListaClave.setEnabled(false);
+            ListaGeneral.setEnabled(false);
+            Data.setEnabled(false);
+            Combo_up1.setEnabled(true);
+            Combo_up2.setEnabled(true);
+            Combo_up3.setEnabled(true);
+            Combo_search1.setEnabled(false);
+            Combo_search2.setEnabled(false);
+            Combo_search3.setEnabled(false);
+        }
     }//GEN-LAST:event_DataActionPerformed
 
     private void TextNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextNewActionPerformed
         // TODO add your handling code here:
-        B.lectura_nueva(tabla, autores, palabras);
-        ListaAutor.setEnabled(false);
-        ListaClave.setEnabled(false);
-        ListaGeneral.setEnabled(false);
-        save.setEnabled(true);
+        boolean Done = B.lectura_nueva(tabla, autores, palabras, titulos);
+        if (Done) {
+            ListaAutor.setEnabled(false);
+            ListaClave.setEnabled(false);
+            ListaGeneral.setEnabled(false);
+            save.setEnabled(true);
+            Data.setEnabled(false);
+            Combo_up1.setEnabled(true);
+            Combo_up2.setEnabled(true);
+            Combo_up3.setEnabled(true);
+            Combo_search1.setEnabled(false);
+            Combo_search2.setEnabled(false);
+            Combo_search3.setEnabled(false);
+        }
     }//GEN-LAST:event_TextNewActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
@@ -426,6 +546,24 @@ public class Ventana1 extends javax.swing.JFrame {
     private void name_keyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_keyActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_name_keyActionPerformed
+
+    private void Combo_search1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo_search1ActionPerformed
+        // TODO add your handling code here:
+        String seleccionado = (String) ListaGeneral.getSelectedItem();
+        FormatearTexto(seleccionado);
+    }//GEN-LAST:event_Combo_search1ActionPerformed
+
+    private void Combo_search2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo_search2ActionPerformed
+        // TODO add your handling code here:
+        String seleccionado = (String) ListaAutor.getSelectedItem();
+        FormatearTexto(seleccionado);
+    }//GEN-LAST:event_Combo_search2ActionPerformed
+
+    private void Combo_search3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo_search3ActionPerformed
+        // TODO add your handling code here:
+        String seleccionado = (String) ListaClave.getSelectedItem();
+        FormatearTexto(seleccionado);
+    }//GEN-LAST:event_Combo_search3ActionPerformed
 
     /**
      * @param args the command line arguments
