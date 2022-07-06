@@ -21,6 +21,7 @@ public class HashTableSecun {
     }
 
     /**
+     * @return booleano
      * @author: Santiago Urdaneta
      * @deprecated: conocer si la TablaHash está vacía
      * @return: booleano
@@ -30,7 +31,7 @@ public class HashTableSecun {
     }
 
     /**
-     * @author Santiago Urdaneta
+     * @author Santiago Urdaneta & Roy Martin
      * @param object elemento con el que se rellenará la HashTable
      * @param title título del artículo científico que se agregará
      * @deprecated: se agrega el nodo a la TablaHash en el key correspondiente
@@ -86,6 +87,7 @@ public class HashTableSecun {
     /**
      * @author Santiago Urdaneta
      * @param title al cual se quiere conocer su posición (key) en la TablaHash
+     * @return entero
      * @deprecated: evalua el título del artículo científico y realiza la
      * función Hash (función modular) con el valor de la sumatoria ASCII del
      * título
@@ -102,11 +104,11 @@ public class HashTableSecun {
     }
 
     /**
-     * @author Santiago Urdaneta
+     * @author Santiago Urdaneta & Roy Martin
      * @param object elemento el cual se quiere encontrar
      * @deprecated: encuentra el nodo accediendo a la key correspondiente y
      * buscandolo en la lista simple enlazada
-     * @return: nodo a encontrar
+     * @return info del nodo a encontrar
      */
     public String Encontrar(String object) {
         int arregloIndice = getArregloIndice(object);

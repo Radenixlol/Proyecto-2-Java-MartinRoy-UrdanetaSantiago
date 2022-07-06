@@ -19,7 +19,13 @@ import javax.swing.border.TitledBorder;
  * @author Radenixlol
  */
 public class Ventana2 {
-    
+     /**
+     * @param text
+     * @author: Roy Martin
+     * @deprecated: Crea una ventana que muestra la información del artículo
+     * solicitada
+     *
+     */
     public void initcomponents2(String text) {
         JPanel Panel = new JPanel();
         Panel.setBorder(new TitledBorder(new EtchedBorder(), "Artículo"));

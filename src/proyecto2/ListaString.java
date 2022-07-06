@@ -7,7 +7,7 @@ package proyecto2;
 
 /**
  *
- * @author Santiago Urdaneta & Roy Martin
+ * @author Roy Martin
  */
 public class ListaString {
 
@@ -15,7 +15,7 @@ public class ListaString {
     private int size;
 
     /**
-     * @author: Santiago Urdaneta
+     * @author: Roy Martin
      * @deprecated: constructor de la lista
      */
     public ListaString() {
@@ -25,7 +25,7 @@ public class ListaString {
     }
 
     /**
-     * @author: Santiago Urdaneta
+     * @author: Roy Martin
      * @deprecated: conocer si la lista está vacía
      * @return booleano
      */
@@ -34,7 +34,7 @@ public class ListaString {
     }
 
     /**
-     * @author Santiago Urdaneta
+     * @author Roy Martin
      * @param NodoNuevo nodo que se insertará en la lista
      * @deprecated: se inserta el nodo al final de la lista
      */

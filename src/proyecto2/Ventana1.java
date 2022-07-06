@@ -6,7 +6,7 @@ package proyecto2;
 
 /**
  *
- * @author Radenixlol
+ * @author Roy Martin
  */
 public class Ventana1 extends javax.swing.JFrame {
 
@@ -54,7 +54,13 @@ public class Ventana1 extends javax.swing.JFrame {
         }
         return arreglo;
     }
-
+     /**
+     * @param seleccionado
+     * @author: Roy Martin
+     * @deprecated: Consigue el nodo de la hashtable principal y 
+     * agarra todos los datos necesarios para crear un texto con formato
+     *
+     */
     public void FormatearTexto(String seleccionado) {
         int index = tabla.getArregloIndice(seleccionado);
         ListaPrinc[] arreglo = tabla.getArreglo();
