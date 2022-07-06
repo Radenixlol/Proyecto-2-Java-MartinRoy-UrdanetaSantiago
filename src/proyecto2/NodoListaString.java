@@ -11,7 +11,7 @@ public class NodoListaString {
 
     /**
      * @author: Roy Martin
-     * @param elemento elemento con el que se rellenará el nodo
+     * @param elemento dato con el que se rellenará el nodo
      * @deprecated: constructor de la Tabla de Dispersión
      */
     public NodoListaString(String elemento) {

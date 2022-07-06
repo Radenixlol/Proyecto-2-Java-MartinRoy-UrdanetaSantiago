@@ -1,7 +1,7 @@
 Arquitectura referencial para mecanismos de Internacionalización y localización en PHP.
 
 Autores
-Christian Guillén Drija 
+Christian Guillén Drija
 Andrea Pérez
 Carlos Maldonado
 
